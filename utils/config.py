@@ -15,6 +15,7 @@ DefaultOption = json.loads('''
 	"address": "localhost",
 	"port": 20000,
 	"server_name": "SECRET SERVER",
+	"initial_version": "1.14.4",
 
 	"__3__": "-------- PCRC Control --------",
 	"file_size_limit_mb": 2048,
@@ -22,7 +23,6 @@ DefaultOption = json.loads('''
 	"time_recorded_limit_hour": 12,
 	"delay_before_afk_second": 15,
 	"record_packets_when_afk": true,
-	"upload_file": false,
 	"auto_relogin": true,
 	"chat_spam_protect": true,
 	"command_prefix": "!!PCRC",
@@ -36,12 +36,12 @@ DefaultOption = json.loads('''
 	"remove_bats": true,
 	"remove_phantoms": true,
 
-    "__5__": "-------- PCRC Whitelist --------",
-    "enabled": false,
-    "whitelist": [
-    	"Fallen_Breath",
-    	"Steve"
-    ]
+	"__5__": "-------- PCRC Whitelist --------",
+	"enabled": false,
+	"whitelist": [
+		"Fallen_Breath",
+		"Steve"
+	]
 }
 ''')
 
@@ -54,7 +54,10 @@ SettableOptions = [
 	'weather',
 	'with_player_only',
 	'remove_items',
-	'remove_bats'
+	'remove_bats',
+	'remove_phantoms',
+	'file_size_limit_mb',
+	'time_recorded_limit_hour',
 ]
 
 
@@ -125,11 +128,11 @@ class Config:
 		messages.append(f"Server address = {self.get('address')}")
 		messages.append(f"Server port = {self.get('port')}")
 		messages.append(f"Server name = {self.get('server_name')}")
+		messages.append(f"Initial Version = {self.get('initial_version')}")
 		messages.append('-------- PCRC Control --------')
 		messages.append(f"File size limit = {self.get('file_size_limit_mb')}MB")
 		messages.append(f"File buffer size = {self.get('file_buffer_size_mb')}MB")
 		messages.append(f"Time recorded limit = {self.get('time_recorded_limit_hour')}h")
-		messages.append(f"Upload file to transfer.sh = {self.get('upload_file')}")
 		messages.append(f"Auto relogin = {self.get('auto_relogin')}")
 		messages.append(f"Chat spam protect = {self.get('chat_spam_protect')}")
 		messages.append('-------- PCRC Features --------')
@@ -139,6 +142,7 @@ class Config:
 		messages.append(f"Record with player only = {self.get('with_player_only')}")
 		messages.append(f"Remove items = {self.get('remove_items')}")
 		messages.append(f"Remove bats = {self.get('remove_bats')}")
+		messages.append(f"Remove phantoms = {self.get('remove_phantoms')}")
 		messages.append('========================================')
 		messages.append('-------- Whitelist --------')
 		messages.append(f"Whitelist = {self.get('enabled')}")
