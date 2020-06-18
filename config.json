@@ -5,6 +5,7 @@
 
     "__2__": "-------- Account and Server --------",
     "online_mode": false,
+    "yggdrasil_server": "",
     "username": "bot_PCRC",
     "password": "secret",
     "address": "localhost",

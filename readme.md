@@ -64,6 +64,8 @@ The config file is `config.json`. All settings can be changed in it. Those which
 
 `online_mode`: Use online mode to login or offline mode instead
 
+`yggdrasil_server`: URL of Yggdrasil server for online mode. Default: `""` means Mojang's server 
+
 `username`: Username for offline mode or email for the used Minecraft account
 
 `password`: Password for the used Minecraft account if login in in online mode

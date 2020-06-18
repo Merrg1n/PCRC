@@ -1,6 +1,7 @@
 import requests
 import json
 import uuid
+import urllib.parse
 from .exceptions import YggdrasilError
 
 #: The base url for Ygdrassil requests
@@ -24,7 +25,33 @@ class YggdrasilServer(object):
 
 
 def _get_yggdrasil_url(url):
-    # TODO impl ALI
+    MAX_JUMP_COUNT = 5
+
+    def formater(url):
+        result = urllib.parse.urlsplit(url)
+        path = result.path.rstrip()
+        if path.endswith("/"):
+            return "https://" + result.netloc + path.rstrip("/")
+        else:
+            return "https://" + result.netloc + path
+
+    # complete url
+    if '//' not in url:
+        url = "https://"+url
+    url = formater(url)  # format url
+
+    for _ in range(MAX_JUMP_COUNT):
+        res = requests.get(url, timeout=15)
+        ali = res.headers.get("X-Authlib-Injector-API-Location", None)
+        if ali == None:
+            break
+        else:
+            ali = formater(urllib.parse.urljoin(url, ali))
+            if url == ali:
+                break
+            else:
+                url = ali
+
     return url
 
 
@@ -287,7 +314,7 @@ class AuthenticationToken(object):
 
         res = self.yggdrasil_server.request_session_server("join",
                                                            {"accessToken": self.access_token,
-                                                            "selectedProfile": self.profile.id_, #this is a hidden bug in pyCraft
+                                                            "selectedProfile": self.profile.id_,  # this is a hidden bug in pyCraft
                                                             "serverId": server_id})
 
         if res.status_code != 204:

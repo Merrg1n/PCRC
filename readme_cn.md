@@ -62,7 +62,9 @@ PCRC 目前支持连接官服原版 Minecraft 服务端，支持以下版本：
 
 ### 账号与服务器
 
-`online_mode`: 是否使用正版登录
+`online_mode`: 是否使用正版登录或外置登录
+
+`yggdrasil_server`: 在线登录时使用的 Yggdrasil 服务器 URL。默认值：`""` 指 Mojang 服务器
 
 `username`: 用于盗版登录的玩家id，或者是用于正版登录的 Minecraft 账号的邮箱
 
